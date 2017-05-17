@@ -34,6 +34,8 @@ paternal_great_uncle(X,Y)	:- grandfather(X,Z), brother(Z,Y), Z\=Y.
 male_descendant(X,Y)        :- male(X), male(Y), X\=Y, son(X,Y).
 male_descendant(X,Y)        :- son(Z,Y), male_descendant(X,Z).
 
+/* I just added a comment to my code */
+
 /* facts from the family tree of the Stark family */
 parent(rickard_stark,		edwyle_stark).
 parent(brandon_stark_snr,	rickard_stark).
