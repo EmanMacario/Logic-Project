@@ -5,34 +5,58 @@
 
 grandparent(X,Y) 	:- parent(X,Z), parent(Z,Y).
 mother(X,Y)		:- parent(X,Y), female(Y).
-son(X,Y)		:- parent(Y,X), male(X). 
+son(X,Y)		:- parent(Y,X), male(X).    /* Here X is the parent of Y */ 
 daughter(X,Y)		:- parent(Y,X), female(X). 
 ancestor(X,Y)		:- parent(X,Y).
 ancestor(X,Y)		:- parent(X,Z), ancestor(Z,Y).
 
 /* Assignment Questions */
+/* Question */
 /* Part 1 */
-/* Question 1 */
-is_a_mother(X)      :- female(X), parent(Y,X), X\=Y.
+is_a_mother(X)      :- female(X), parent(_,X).
 
-/* Question 2 */
-grandfather(X, Y)   :- grandparent(X,Y), male(Y).
+/* Part 2 */
+grandfather(X, Y)   :- parent(X,Z), parent(Z,Y), male(Y).
 
-/* Question 3 */
+/* Part 3 */
 sisters(X,Y)        :- female(X), female(Y), parent(X,Z), 
                        parent(Y,Z), X\=Y.
 
-/* Question 4 */
-/* Y is a brother of X */
+/* Part 4 */
+/* Alo's answer: 
 brother(X,Y)		:- male(Y), parent(X, Z), parent(Y, Z), Y\=X.
 uncle(X, Y)         :- parent(X, Z),brother(Z, Y).
+*/
 
-/* Question 5 */
+/* Eman's answer: */
+uncle(X,Y)          :- male(Y), parent(X,Z), parent(Z,W), parent(Y,W),
+    				   Y\=Z.
+
+/* Part 5 */
+/* Alo's answer: 
 paternal_great_uncle(X,Y)	:- grandfather(X,Z), brother(Z,Y), Z\=Y.
+*/
 
-/* Question 6 - unsure */
+/* Eman's answer: */
+paternal_great_uncle(X,Y)   :- parent(X,Z), male(Z), parent(Z,W),
+    						   male(W), uncle(Z,Y), Y\=W.
+
+/* Part 6 */
 male_descendant(X,Y)        :- male(X), male(Y), X\=Y, son(X,Y).
-male_descendant(X,Y)        :- son(Z,Y), male_descendant(X,Z).
+male_descendant(X,Y)        :- son(X,Z), male_descendant(Z,Y).
+
+
+/* Question 2 */
+/* Part 1 
+    uncle(A1, benjen_stark), uncle(A2, benjen_stark), A1\=A2.
+ * Part 2
+  	son(A1, red_walder_frey), son(A1, A2), son(A1, A3), son(A1, A4),
+    A2\=A3, A2\=A4, A3\=A4.
+ * Part 3
+    paternal_great_uncle(A1, kevan_lannister).
+ * Part 4
+    female(A1), ancestor(A1, tywin_lannister).
+ */
 
 /* facts from the family tree of the Stark family */
 parent(rickard_stark,		edwyle_stark).
