@@ -1,4 +1,21 @@
 /* australia.pl */
+/* Question 4 */
+/* Part 1 */
+bordering_cities(C1, C2) :- city_in(X,C1), city_in(Y,C2), X\=Y,
+                            borders(X,Y).
+/* Part 2 */
+borders_three(S) :- borders(S,S1), borders(S,S2), S1\=S2.
+
+/* Part 3 */
+places_to_go(T) :- city_in(vic, T), T=melbourne.
+places_to_go(T) :- city_in(S, T), borders1(vic, S).
+
+/* Part 4 
+   city(M, yarra_river, _), city_in(V, M), borders1(V, S), city_in(S, C).
+*/
+
+/* Part 5 */
+
 
 /* state(X) says that X is a state */
 
@@ -34,7 +51,7 @@ city_in(nt, darwin).
 city_in(wa, fremantle).
 city_in(wa, perth).
 
-/* city(C,W,A) says that city C his one waterway W with attraction A */
+/* city(C,W,A) says that city C has one waterway W with attraction A */
 
 city(hobart, derwent_river, museum_of_old_and_new_art).
 city(melbourne, yarra_river, federation_square).
