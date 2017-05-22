@@ -5,7 +5,7 @@
 
 grandparent(X,Y) 	:- parent(X,Z), parent(Z,Y).
 mother(X,Y)		:- parent(X,Y), female(Y).
-son(X,Y)		:- parent(Y,X), male(X).    /* Here X is the parent of Y */ 
+son(X,Y)		:- parent(Y,X), male(X).    /* Here X is the parent of Y, but they should be swapped */ 
 daughter(X,Y)		:- parent(Y,X), female(X). 
 ancestor(X,Y)		:- parent(X,Y).
 ancestor(X,Y)		:- parent(X,Z), ancestor(Z,Y).
