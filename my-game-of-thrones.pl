@@ -1,12 +1,13 @@
+
 /* game-of-thrones-2.pl */
 
 /* usage for parent/2: */
 /* parent(X,Y) means child X has parent Y, or a parent of X is Y. */
 
 grandparent(X,Y) 	:- parent(X,Z), parent(Z,Y).
-mother(X,Y)		:- parent(X,Y), female(Y).
-son(X,Y)		:- parent(Y,X), male(X).    /* Here X is the parent of Y, but they should be swapped */ 
-daughter(X,Y)		:- parent(Y,X), female(X). 
+mother(X,Y)			:- parent(X,Y), female(Y).
+son(X,Y)			:- parent(X,Y), male(X).         /* Swapped X and Y, now different to original version */
+daughter(X,Y)		:- parent(X,Y), female(X).       /* Did same thing for daughter predicate */
 ancestor(X,Y)		:- parent(X,Y).
 ancestor(X,Y)		:- parent(X,Z), ancestor(Z,Y).
 
@@ -41,17 +42,24 @@ paternal_great_uncle(X,Y)	:- grandfather(X,Z), brother(Z,Y), Z\=Y.
 paternal_great_uncle(X,Y)   :- parent(X,Z), male(Z), parent(Z,W),
     						   male(W), uncle(Z,Y), Y\=W.
 
-/* Part 6 */
-male_descendant(X,Y)        :- male(X), male(Y), X\=Y, son(X,Y).
-male_descendant(X,Y)        :- son(X,Z), male_descendant(Z,Y).
+/* Part 6 - 
+ * 
+ * This one is wrong 
+male_descendant(X,Y)        :- male(X), male(Y), X\=Y, son(Y,X).
+male_descendant(X,Y)        :- son(Z,X), male_descendant(Z,Y).
+*/
+
+/* Not sure if this one is right */
+male_descendant(X,Y) :- male(X), X\=Y, son(Y,X).
+male_descendant(X,Y) :- male(X), X\=Y, son(Z,X), male_descendant(Z,Y). 
 
 
 /* Question 2 */
 /* Part 1 
     uncle(A1, benjen_stark), uncle(A2, benjen_stark), A1\=A2.
  * Part 2
-  	son(A1, red_walder_frey), son(A1, A2), son(A1, A3), son(A1, A4),
-    A2\=A3, A2\=A4, A3\=A4.
+  	son(red_walder_frey, P), son(A1, P), son(A2, P), son(A3, P),
+    A1\=A2, A1\=A3, A2\=A3.
  * Part 3
     paternal_great_uncle(A1, kevan_lannister).
  * Part 4
@@ -167,4 +175,3 @@ male(tion_frey).
 male(red_walder_frey).
 male(tywin_frey).
 male(willem_frey).
-
