@@ -1,5 +1,5 @@
 
-/* game-of-thrones-2.pl */
+/* my-game-of-thrones.pl */
 
 /* usage for parent/2: */
 /* parent(X,Y) means child X has parent Y, or a parent of X is Y. */
@@ -42,17 +42,18 @@ paternal_great_uncle(X,Y)	:- grandfather(X,Z), brother(Z,Y), Z\=Y.
 paternal_great_uncle(X,Y)   :- parent(X,Z), male(Z), parent(Z,W),
     						   male(W), uncle(Z,Y), Y\=W.
 
-/* Part 6 - 
- * 
- * This one is wrong 
-male_descendant(X,Y)        :- male(X), male(Y), X\=Y, son(Y,X).
-male_descendant(X,Y)        :- son(Z,X), male_descendant(Z,Y).
-*/
 
-/* Not sure if this one is right */
+/* Part 6 */
+
+/* Keeping this here just in case, pretty sure it's incorrect
 male_descendant(X,Y) :- male(X), X\=Y, son(Y,X).
 male_descendant(X,Y) :- male(X), X\=Y, son(Z,X), male_descendant(Z,Y). 
+*/
 
+/* Line of male descendants from X back to Y */
+male_descendant(X,Y) :- male(X), male(Y), X\=Y, parent(X,Y).
+male_descendant(X,Y) :- male(X), male(Y), X\=Y, parent(X,Z),
+    					male(Z), male_descendant(Z,Y).
 
 /* Question 2 */
 /* Part 1 

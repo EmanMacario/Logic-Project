@@ -11,10 +11,8 @@ places_to_go(T) :- city_in(vic, T), T=melbourne.
 places_to_go(T) :- city_in(S, T), borders1(vic, S).
 
 /* Part 4 
-   city(M, yarra_river, _), city_in(V, M), borders1(V, S), city_in(S, C).
+   city(M, yarra_river, _), city_in(V, M), borders(V, S), city_in(S, C).
 */
-
-/* Part 5 */
 
 
 /* state(X) says that X is a state */
