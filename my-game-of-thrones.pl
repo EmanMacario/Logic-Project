@@ -11,8 +11,9 @@ daughter(X,Y)		:- parent(X,Y), female(X).       /* Did same thing for daughter p
 ancestor(X,Y)		:- parent(X,Y).
 ancestor(X,Y)		:- parent(X,Z), ancestor(Z,Y).
 
+/******************************************************************************/
 /* Assignment Questions */
-/* Question */
+/* Question 1 */
 /* Part 1 */
 is_a_mother(X)      :- female(X), parent(_,X).
 
@@ -20,42 +21,28 @@ is_a_mother(X)      :- female(X), parent(_,X).
 grandfather(X, Y)   :- parent(X,Z), parent(Z,Y), male(Y).
 
 /* Part 3 */
-sisters(X,Y)        :- female(X), female(Y), parent(X,Z), 
+sisters(X, Y)        :- female(X), female(Y), parent(X,Z), 
                        parent(Y,Z), X\=Y.
 
+
 /* Part 4 */
-/* Alo's answer: 
-brother(X,Y)		:- male(Y), parent(X, Z), parent(Y, Z), Y\=X.
-uncle(X, Y)         :- parent(X, Z),brother(Z, Y).
-*/
+uncle(X, Y)          :- male(Y), parent(X,Z), parent(Z,W), parent(Y,W),
+    				    Y\=Z.
 
-/* Eman's answer: */
-uncle(X,Y)          :- male(Y), parent(X,Z), parent(Z,W), parent(Y,W),
-    				   Y\=Z.
 
-/* Part 5 */
-/* Alo's answer: 
-paternal_great_uncle(X,Y)	:- grandfather(X,Z), brother(Z,Y), Z\=Y.
-*/
-
-/* Eman's answer: */
+/* Part 5 */  
 paternal_great_uncle(X,Y)   :- parent(X,Z), male(Z), parent(Z,W),
     						   male(W), uncle(Z,Y), Y\=W.
 
-
 /* Part 6 */
-
-/* Keeping this here just in case, pretty sure it's incorrect
-male_descendant(X,Y) :- male(X), X\=Y, son(Y,X).
-male_descendant(X,Y) :- male(X), X\=Y, son(Z,X), male_descendant(Z,Y). 
-*/
-
-/* Line of male descendants from X back to Y */
 male_descendant(X,Y) :- male(X), male(Y), X\=Y, parent(X,Y).
 male_descendant(X,Y) :- male(X), male(Y), X\=Y, parent(X,Z),
     					male(Z), male_descendant(Z,Y).
 
+/******************************************************************************/
+
 /* Question 2 */
+/* Queries */
 /* Part 1 
     uncle(A1, benjen_stark), uncle(A2, benjen_stark), A1\=A2.
  * Part 2
@@ -66,6 +53,7 @@ male_descendant(X,Y) :- male(X), male(Y), X\=Y, parent(X,Z),
  * Part 4
     female(A1), ancestor(A1, tywin_lannister).
  */
+/******************************************************************************/
 
 /* facts from the family tree of the Stark family */
 parent(rickard_stark,		edwyle_stark).
