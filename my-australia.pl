@@ -1,4 +1,6 @@
-/* australia.pl */
+/* my-australia.pl */
+/******************************************************************************/
+/* Assignment Questions */
 /* Question 4 */
 /* Part 1 */
 bordering_cities(C1, C2) :- city_in(X,C1), city_in(Y,C2), X\=Y,
@@ -8,12 +10,11 @@ borders_three(S) :- borders(S,S1), borders(S,S2), S1\=S2.
 
 /* Part 3 */
 places_to_go(T) :- city_in(vic, T), T=melbourne.
-places_to_go(T) :- city_in(S, T), borders1(vic, S).
+places_to_go(T) :- city_in(S, T), borders(vic, S).
 
-/* Part 4 
    city(M, yarra_river, _), city_in(V, M), borders(V, S), city_in(S, C).
 */
-
+/******************************************************************************/
 
 /* state(X) says that X is a state */
 
