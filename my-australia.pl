@@ -12,6 +12,7 @@ borders_three(S) :- borders(S,S1), borders(S,S2), S1\=S2.
 places_to_go(T) :- city_in(vic, T), T=melbourne.
 places_to_go(T) :- city_in(S, T), borders(vic, S).
 
+/* Part 4 - Below is the query
    city(M, yarra_river, _), city_in(V, M), borders(V, S), city_in(S, C).
 */
 /******************************************************************************/
